@@ -1,0 +1,36 @@
+@startuml
+hide circle
+hide empty members
+
+class Persona {
+  nombre
+}
+class Aura {
+  total
+}
+class Accion {
+  descripcion
+  fecha
+  buscada
+}
+class Reaccion {
+  intensidad
+}
+enum TipoReaccion {
+  ADMIRACION
+  RISA
+  INDIFERENCIA
+  CRINGE
+}
+
+Persona "1" -- "1" Aura
+Persona "autor 1" -- "*" Accion
+Persona "observador 1" -- "*" Reaccion
+Accion "1" -- "*" Reaccion
+Reaccion ..> TipoReaccion
+
+note right of Reaccion
+  Quien reacciona no puede
+  ser quien hizo la acción
+end note
+@enduml
