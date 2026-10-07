@@ -6,7 +6,7 @@ class Persona {
   nombre
 }
 class Aura {
-  total
+  /total
 }
 class Accion {
   descripcion
@@ -15,6 +15,10 @@ class Accion {
 }
 class Reaccion {
   intensidad
+}
+class CambioDeAura {
+  cantidad
+  fecha
 }
 enum TipoReaccion {
   ADMIRACION
@@ -28,9 +32,17 @@ Persona "autor 1" -- "*" Accion
 Persona "observador 1" -- "*" Reaccion
 Accion "1" -- "*" Reaccion
 Reaccion ..> TipoReaccion
+Reaccion "1" -- "1" CambioDeAura
+Aura "1" *-- "*" CambioDeAura
 
 note right of Reaccion
   Quien reacciona no puede
   ser quien hizo la acción
+end note
+
+note bottom of Aura
+  El total es lo que resulta de sumar
+  todos los cambios de aura.
+  Así se sabe por qué subió o bajó.
 end note
 @enduml
