@@ -30,11 +30,21 @@ class TipoDeAccion {
 class Valoracion {
   puntos
 }
+class Farmeo {
+  inicio
+  fin
+  estado
+  /auraGanada
+}
 enum TipoReaccion {
   ADMIRACION
   RISA
   INDIFERENCIA
   CRINGE
+}
+enum EstadoFarmeo {
+  ACTIVO
+  TERMINADO
 }
 
 Persona "1" -- "1" Aura
@@ -49,6 +59,10 @@ Accion "*" -- "1" Contexto
 Accion "*" -- "1" TipoDeAccion
 Valoracion "*" -- "1" Contexto
 Valoracion "*" -- "1" TipoDeAccion
+
+Persona "1" -- "*" Farmeo
+Farmeo "0..1" o-- "2..*" Accion
+Farmeo ..> EstadoFarmeo
 
 note right of Reaccion
   Quien reacciona no puede
@@ -65,5 +79,12 @@ note bottom of Valoracion
   en un contexto. Puede ser negativo:
   lo mismo da aura en un sitio
   y la quita en otro.
+end note
+
+note bottom of Farmeo
+  Agrupa acciones buscadas de una
+  misma persona. El aura ganada es
+  lo que sumaron las reacciones
+  a esas acciones.
 end note
 @enduml
